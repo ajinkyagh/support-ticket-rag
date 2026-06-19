@@ -4,3 +4,5 @@ __pycache__/
 .DS_Store
 venv/
 data/tickets.csv
+dbt_project/target/
+dbt_project/dbt_packages/
