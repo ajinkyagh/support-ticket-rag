@@ -1,0 +1,10 @@
+{
+  "mcpServers": {
+    "support-ticket-rag": {
+      "command": "/Users/ajinkyagh/Desktop/Project/support-ticket-rag/venv/bin/python",
+      "args": [
+        "/Users/ajinkyagh/Desktop/Project/support-ticket-rag/mcp_server/server.py"
+      ]
+    }
+  }
+}
