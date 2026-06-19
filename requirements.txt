@@ -5,3 +5,4 @@ datasets
 ollama
 pandas
 anthropic
+mcp[cli]
