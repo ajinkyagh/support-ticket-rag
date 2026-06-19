@@ -17,7 +17,8 @@ clean-targets:
 
 models:
   support_ticket_rag:
+    +materialized: view
     staging:
       +materialized: view
     marts:
-      +materialized: table
+      +materialized: view
