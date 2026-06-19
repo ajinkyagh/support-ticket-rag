@@ -1,0 +1,40 @@
+version: 2
+
+models:
+  - name: stg_tickets
+    description: >
+      Cleaned staging layer for raw support tickets.
+      Excludes embedding vectors and filters null bodies.
+
+    columns:
+      - name: ticket_id
+        description: Unique identifier for each support ticket.
+        tests:
+          # Ensures no two tickets share the same ID — duplicate ticket_ids
+          # would cause incorrect counts and joins in downstream mart models.
+          - unique
+          # Ensures every row has an identifier — rows without a ticket_id
+          # cannot be traced back to the source and should not reach marts.
+          - not_null
+
+      - name: body
+        description: Full text of the customer's support message.
+        tests:
+          # The body is the core content used for embeddings and RAG retrieval.
+          # A null body means the ticket has no content and must be excluded.
+          - not_null
+
+      - name: category
+        description: High-level support category assigned to the ticket.
+        tests:
+          # Validates that category values are within the known set from the
+          # Hugging Face dataset. Any value outside this list indicates either
+          # a data quality issue or a new category that needs to be onboarded.
+          - accepted_values:
+              values:
+                - ORDER
+                - ACCOUNT
+                - PAYMENT
+                - SHIPPING
+                - REFUND
+                - FEEDBACK

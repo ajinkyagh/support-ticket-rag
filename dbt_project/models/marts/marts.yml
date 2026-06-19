@@ -1,0 +1,26 @@
+version: 2
+
+models:
+  - name: category_summary
+    description: >
+      Aggregated summary of ticket volume and intent diversity per category.
+      Each row represents one unique support category.
+
+    columns:
+      - name: category
+        description: Support category being summarised.
+        tests:
+          # Each category should appear exactly once in this summary table.
+          # A duplicate would mean the GROUP BY did not collapse rows correctly,
+          # producing inflated counts that would mislead any dashboard or report.
+          - unique
+          # A null category would create an ungrouped catch-all row that
+          # misrepresents the data — every summary row must be labelled.
+          - not_null
+
+      - name: ticket_count
+        description: Total number of tickets in this category.
+        tests:
+          # A null ticket_count means the aggregation failed for that category.
+          # Every category row must have a concrete count to be usable.
+          - not_null
