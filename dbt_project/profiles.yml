@@ -3,10 +3,11 @@ support_ticket_rag:
   outputs:
     dev:
       type: postgres
-      host: "{{ env_var('SUPABASE_HOST') }}"
-      user: "postgres"
+      host: "{{ env_var('SUPABASE_POOLER_HOST') }}"
+      user: "{{ env_var('SUPABASE_POOLER_USER') }}"
       password: "{{ env_var('SUPABASE_DB_PASSWORD') }}"
-      port: 5432
+      port: 6543
       dbname: postgres
       schema: public
       threads: 1
+      sslmode: require
