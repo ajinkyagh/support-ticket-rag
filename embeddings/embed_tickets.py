@@ -14,7 +14,7 @@ supabase = create_client(SUPABASE_URL, SUPABASE_KEY)
 
 # Step 3: Load the CSV file
 print("Loading tickets from CSV...")
-df = pd.read_csv("data/tickets.csv")
+df = pd.read_csv("data/tickets_augmented.csv")
 total = len(df)
 print(f"Loaded {total} tickets")
 
@@ -44,7 +44,7 @@ for idx, row in df.iterrows():
 
         # Print progress every 50 tickets
         if success_count % 50 == 0:
-            print(f"Embedded {success_count}/{total}")
+            print(f"Embedded {success_count}/900")
 
     except Exception as e:
         # Skip failed rows and continue processing the rest
