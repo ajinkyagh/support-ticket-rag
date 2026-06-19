@@ -1,3 +1,6 @@
 supabase
 python-dotenv
 requests
+datasets
+ollama
+pandas
